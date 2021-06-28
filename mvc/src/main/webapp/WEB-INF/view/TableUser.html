@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en
+" xmlns:th="http://www.thymeleaf.org"
+>
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+</head>
+<body>
+<form id="FormSave">
+  <div class="form-group row">
+    <div class="col-md-12 card-header"><i class="fa fa-table"></i>&nbsp;Başvuru Takip
+    </div>
+  </div>
+  <div class="card-body">
+    <div class="table-responsive">
+      <div style="padding-bottom: 15px">
+      <a th:href="@{/createUser}"  class="btn btn-danger">Yeni Ekle</a>
+      </div>
+      <table id="basvuranlar" class="table table-bordered">
+        <thead>
+        <tr>
+          <th>ID</th>
+          <th>Ad Soyad</th>
+          <th>Yaş</th>
+          <th>Eğitim</th>
+          <th>Meslek</th>
+          <th>Adres</th>
+          <th>İşlem</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="user : ${user}">
+          <td th:text="${user.id}"></td>
+          <td th:text="${user.nameSurname}"></td>
+          <td th:text="${user.age}"></td>
+          <td th:text="${user.education}"></td>
+          <td th:text="${user.job}"></td>
+          <td th:text="${user.address}"></td>
+          <td class="text-center">
+            <a th:href="@{/delete(id=${user.id})}"  class="btn btn-danger">Sil</a>
+            <a th:href="@{/updateUser(id=${user.id})}"  class="btn btn-success">Güncelle</a>
+          </td>
+        </tr>
+        </tbody>
+
+      </table>
+    </div>
+  </div>
+</form>
+<script>
+    function rowClicked(value) {
+        window.location.href = "/updateUser?id=" + value;
+    }
+</script>
+</body>
+</html>
